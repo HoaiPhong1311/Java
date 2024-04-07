@@ -1,0 +1,38 @@
+Nhiệm vụ của bài toán này rất đơn giản, bạn hãy đổi giây sang giờ, phút, giây. Ví dụ 67s = 0 giờ, 1 phút, 7 giây.
+
+Gợi ý : Số giờ = N / 3600
+
+Tính số giây dư = N % 3600, tiếp tục chia cho 60 ra phút, phần lẻ còn lại là giây
+
+Input Format
+
+Dòng duy nhất chứa N : số giây cần đổi
+
+Constraints
+
+0<=N<=10^16
+
+Output Format
+
+In ra giờ, phút, giây theo mẫu.
+
+Sample Input 0
+
+392
+Sample Output 0
+
+0h : 6m : 32s
+
+import java.util.Scanner;
+
+public class Code_buoi_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long s = sc.nextLong();
+        long h = s / 3600;
+        long m = s % 3600 / 60;
+        long ss = s % 3600 % 60;
+        System.out.printf("%dh : %dm : %ds", h, m, ss);
+    }
+}

@@ -1,0 +1,54 @@
+Một ngày ở hành tinh 28Tech có 28 giờ, mỗi giờ lại có 28 phút và mỗi phút lại có 28s. Hiện tại đồng hồ tại hành tinh 28Tech đang ở h giờ và m phút, câu hỏi đặt ra là sau k phút nữa, đồng hồ sẽ là bao nhiêu giờ bao nhiêu phút. Khi in ra nếu giờ hoặc phút là số có 1 chữ số, bạn phải thêm số 0 vào đầu.
+
+Gợi ý : Có thể lấy K chia dư cho số phút trong 1 ngày và xử lý phần dư
+
+Input Format
+
+3 số nguyên là h m và k
+
+Constraints
+
+0<=h<=27
+
+0<=m<=27
+
+0<=k<=10000
+
+Output Format
+
+In ra đáp án của bài toán theo mẫu
+
+Sample Input 0
+
+10 4 19
+Sample Output 0
+
+10h:23m
+Sample Input 1
+
+19 9 21
+Sample Output 1
+
+20h:02m
+Sample Input 2
+
+10 26 9852
+Sample Output 2
+
+26h:22m
+
+import java.util.Scanner;
+
+public class Code_buoi_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int h = sc.nextInt();
+        int m = sc.nextInt();
+        int k = sc.nextInt();
+        int sum = (h * 28 + m + k) % 784;
+        int h1 = sum / 28;
+        int m1 = sum % 28;
+        System.out.printf("%02dh:%02dm", h1, m1);
+    }
+}
