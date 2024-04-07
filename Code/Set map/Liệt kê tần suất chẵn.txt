@@ -1,0 +1,68 @@
+Cho mảng A[] gồm N phần tử, bạn hãy in ra các giá trị có số lần xuất hiện chẵn trong mảng.
+
+Input Format
+
+Dòng 1 là N : số lượng phần tử trong mảng
+
+Dòng 2 là N số cách nhau 1 dấu cách
+
+Constraints
+
+1<=N<=10^6
+
+-10^9<=A[i]<=10^9
+
+Output Format
+
+Đầu tiên bạn in ra theo thứ tự tăng dần các giá trị sau đó cách ra 1 dòng và in ra theo thứ tự giảm dần về các giá trị
+Sample Input 0
+
+11
+2 2 1 2 4 4 3 2 4 0 0 
+Sample Output 0
+
+0 2
+2 4
+
+2 4
+0 2
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Draft {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        int n = sc.nextInt();
+        for(int i = 0; i < n; i++){
+            int x = sc.nextInt();
+            if(map.containsKey(x)){
+                map.put(x, map.get(x) + 1);
+            } else{
+                map.put(x, 1);
+            }
+        }
+        Set<Map.Entry<Integer, Integer>> set = map.entrySet();
+        ArrayList<Map.Entry<Integer, Integer>> arr = new ArrayList<>();
+        for(Map.Entry<Integer, Integer> entry : set){
+            if(entry.getValue() % 2 == 0){
+                System.out.println(entry.getKey() + " " + entry.getValue());
+                arr.add(entry);
+            }
+        }
+        System.out.println("");
+        for(int i = arr.size() - 1; i >= 0; i--)
+            System.out.println(arr.get(i).getKey() + " " + arr.get(i).getValue());
+    }
+}

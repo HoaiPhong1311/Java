@@ -1,0 +1,67 @@
+Cho 1 bảng số gồm N dòng và mỗi dòng gồm N số, nhiệm vụ của bạn là in ra những giá trị xuất hiện ở mọi dòng. Gợi ý : Dùng map đánh dấu, dòng 1 : đánh dấu các giá trị ở dòng 1 có value = 1, dòng 2 sẽ kiểm tra giá trị nào được đánh dấu ở dòng 1 mới đánh dấu tại dòng 2, tương tự tới dòng n, những số nào được đánh dấu ở cả n dòng sẽ thỏa mãn yêu cầu.
+
+Input Format
+
+Dòng 1 là N : số dòng của bảng số
+
+N dòng tiếp theo mỗi dòng gồm N số nguyên viết cách nhau 1 dấu cách
+
+Constraints
+
+1<=N<=100
+
+Các số trong bảng số là số nguyên int
+
+Output Format
+
+In ra các số xuất hiện ở mọi dòng theo thứ tự từ nhỏ đến lớn, nếu không tồn tại số nào in ra NOT FOUND
+Sample Input 0
+
+5
+0 1 4 0 4 
+3 2 2 3 0 
+0 3 4 0 1 
+0 1 4 4 1 
+0 0 0 0 2 
+Sample Output 0
+
+0 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+
+public class Draft {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        int n = sc.nextInt();
+        for(int i = 1; i <= n; i++){
+            int x = sc.nextInt();
+            map.put(x, 1);
+        }
+        for(int i = 2; i <= n; i++){
+            for(int j = 1; j <=n; j++){
+                int x = sc.nextInt();
+                if(map.containsKey(x) && map.get(x) == i - 1)
+                    map.put(x, i);
+            }
+        }
+        Set<Map.Entry<Integer, Integer>> set = map.entrySet();
+        boolean check = false;
+        for(Map.Entry<Integer, Integer> entry : set){
+            if(entry.getValue() == n){
+                System.out.print(entry.getKey() + " ");
+                check = true;
+            }
+        }
+        if(check != true) System.out.println("NOT FOUND");
+    }
+}

@@ -1,0 +1,65 @@
+Cho mảng A[] và B[] lần lượt gồm N và M số nguyên, nhiệm vụ của bạn là tìm những phần tử xuất hiện trong mảng thứ nhất nhưng không xuất hiện trong mảng thứ 2, liệt kê theo thứ tự từ bé đến lớn.
+
+Gợi ý : Dùng 2 set để lưu mảng A, B. Duyệt các phần tử trong set 1 và tìm kiếm nếu phần tử ko nằm trong set 2 thì in ra.
+
+Input Format
+
+Dòng 1 gồm N và M
+
+Dòng 2 gồm N số trong mảng A[]
+
+Dòng 3 gồm M số trong mảng B[]
+
+Constraints
+
+1<=N,M<=10^5
+
+-10^9<=A[i],B[i]<=10^9
+
+Output Format
+
+In ra đáp án của bài toán
+
+Sample Input 0
+
+6 6
+1 9 3 8 0 7 
+3 1 7 3 7 5 
+Sample Output 0
+
+0 8 9 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Draft {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        int a = sc.nextInt(), b = sc.nextInt();
+        for(int i = 0; i < a; i++){
+            int x = sc.nextInt();
+            map.put(x, 1);
+        }
+        for(int i = 0; i < b; i++){
+            int x = sc.nextInt();
+            if(map.containsKey(x) && map.get(x) == 1)
+                map.put(x, 2);
+        }
+        Set<Map.Entry<Integer, Integer>> set = map.entrySet();
+        for(Map.Entry<Integer, Integer> entry : set){
+            if(entry.getValue() == 1)
+                System.out.print(entry.getKey() + " ");
+        }
+    }
+}
