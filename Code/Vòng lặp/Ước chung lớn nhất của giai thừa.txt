@@ -1,0 +1,39 @@
+Cho 2 số a và b. Nhiệm vụ của bạn là tính ước chung lớn nhất của a giai thừa và b giai thừa
+
+Input Format
+
+2 số nguyên không âm a và b.
+
+Constraints
+
+0<=a,b<=10^12; 0<=min(a, b)<=12
+
+Output Format
+
+In ra kết quả trên 1 dòng
+
+Sample Input 0
+
+2 5
+Sample Output 0
+
+2
+Explanation 0
+
+2! = 2; 5! = 120. Ước chung lớn nhất của 2 và 120 là 2.
+
+import java.util.Scanner;
+
+public class Code_buoi_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        long min = Math.min(a, b);
+        long gt = 1;
+        for(long i = 1; i <= min; i++)
+            gt *= i;
+        System.out.println(gt);
+    }
+}

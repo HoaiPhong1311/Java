@@ -1,0 +1,46 @@
+Cho N là số nguyên dương, in ra hình tương ứng.
+
+Input Format
+
+Dòng duy nhất chứa số nguyên dương N
+
+Constraints
+
+5<=N<=25
+
+Output Format
+
+In ra hình tương ứng
+
+Sample Input 0
+
+6
+Sample Output 0
+
+ABCDEF
+bcdefg
+CDEFGH
+defghi
+EFGHIJ
+fghijk
+
+import java.util.Scanner;
+
+public class Code_buoi_1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(i % 2 == 0){
+                    System.out.print((char)(i + 65 + j));
+                }
+                else{
+                    System.out.print((char)(i + 97 + j));
+                }
+            }
+            System.out.println();
+        }
+    }
+}
