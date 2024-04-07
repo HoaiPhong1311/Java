@@ -1,0 +1,38 @@
+Cho 2 số a và b, hãy tính ước chung lớn nhất và bội chung nhỏ nhất của 2 số a và b. Trong đó hàm UCLN sử dụng đệ quy để tính.
+
+Input Format
+
+2 số nguyên dương a và b.
+
+Constraints
+
+1≤a,b≤10^12;
+
+Output Format
+
+In ra UCLN và BCNN của 2 số. Dữ liệu đảm bảo UCLN của 2 số nằm trong khoảng số nguyên 64 bit.
+
+Sample Input 0
+
+10 20
+Sample Output 0
+
+10 20
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static long ucln(long a, long b){
+        if(b == 0) return a;
+        else return ucln(b, a % b);
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        System.out.print(ucln(a, b) + " " + a / ucln(a, b) * b);
+    }
+}

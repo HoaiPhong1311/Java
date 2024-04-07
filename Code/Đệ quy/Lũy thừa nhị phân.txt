@@ -1,0 +1,42 @@
+Cho 2 số nguyên không âm a và b. Hãy tính a^b%(10^9+7). Kiến thức bạn cần sử dụng là Binary Exponentiation.
+
+Input Format
+
+2 số nguyên dương a, b
+
+Constraints
+
+1≤a,b≤10^9
+
+Output Format
+
+In ra kết quả của bài toán.
+
+Sample Input 0
+
+2 10
+Sample Output 0
+
+1024
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static int mod = 1000000007;
+    
+    public static long mu(long a, long b){
+        if(b == 0) return 1;
+        long tmp = mu(a, b / 2);
+        if(b % 2 != 0) return ((tmp % mod) * (tmp % mod) % mod * (a % mod) % mod);
+        else return (tmp % mod) * (tmp % mod) % mod;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        System.out.println(mu(a, b));
+    }
+}

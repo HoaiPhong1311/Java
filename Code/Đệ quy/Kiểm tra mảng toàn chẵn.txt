@@ -1,0 +1,50 @@
+Cho một mảng số nguyên A gồm N phần tử, hãy kiểm tra xem mảng có phải toàn số chẵn hay không?
+
+Input Format
+
+Dòng đầu tiên là số nguyên dương N; Dòng thứ 2 là N số nguyên trong mảng được viết cách nhau một dấu cách.
+
+Constraints
+
+1≤n≤1000; 1≤A[i]≤10^6
+
+Output Format
+
+In ra YES nếu mảng toàn số chẵn, ngược lại in ra NO.
+
+Sample Input 0
+
+4
+2 8 10 20012
+Sample Output 0
+
+YES
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static long mang(int a[], int x){
+        if(x == 0){
+            if(a[x] % 2 == 0) return 1;
+            else return 0;
+        }
+        else{
+            if(a[x - 1] % 2 == 0) return mang(a, x - 1);
+            else return 0;
+            
+        }
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++){
+            a[i] = sc.nextInt();
+        }
+        if(mang(a, n - 1) != 0) System.out.println("YES");
+        else System.out.println("NO");
+    }
+}
