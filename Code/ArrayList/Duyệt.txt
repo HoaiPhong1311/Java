@@ -1,0 +1,57 @@
+Cho vector V có N phần tử, nhiệm vụ của bạn in ra các phần tử từ chỉ số L tới chỉ số R sau đó in ra các phần tử từ chỉ số R tới chỉ số L bằng cách dùng iterator.
+
+Input Format
+
+Dòng 1 là N : số lượng phần tử trong vector. Dòng 2 là N số trong vector. Dòng 3 là L và R
+
+Constraints
+
+1<=N<=1000. 0<=L<=R
+
+Output Format
+
+Dòng 1 in ra vector từ L tới R, dòng 2 in ra vector từ R tới L.
+
+Sample Input 0
+
+10
+8 1 8 3 8 5 3 5 9 7 
+3 6
+Sample Output 0
+
+3 8 5 3 
+3 5 8 3
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class Draft {
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        ArrayList<Integer> arr = new ArrayList<>();
+        ArrayList<Integer> arr1 = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            arr.add(sc.nextInt());
+        }
+        int l = sc.nextInt(), r = sc.nextInt();
+        for(int i = l; i <= r; i++){
+            arr1.add(arr.get(i));
+        }
+        for(int i = 0; i < arr1.size(); i++){
+            System.out.print(arr1.get(i) + " ");
+        }
+        System.out.println("");
+        for(int i = arr1.size() - 1; i >= 0; i--){
+            System.out.print(arr1.get(i) + " ");
+        }
+    }
+}

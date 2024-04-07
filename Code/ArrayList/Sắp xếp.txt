@@ -1,0 +1,56 @@
+Cho vector V có N phần tử, nhiệm vụ của bạn là sắp xếp các phần tử trong vector theo thứ tự tăng dần, giảm dần sau đó in ra bằng cách dùng iterator.
+
+Để sắp xếp vector bạn dùng hàm sort trong thư viện
+
+Input Format
+
+Dòng 1 là N : số lượng phần tử trong vector. Dòng 2 là N số trong vector.
+
+Constraints
+
+1<=N<=1000. Các phần tử của vector là số nguyên 32bit.
+
+Output Format
+
+Dòng 1 in ra vector tăng dần, dòng 2 in ra vector giảm dần.
+
+Sample Input 0
+
+8
+992 763 670 344 67 268 298 852 
+Sample Output 0
+
+67 268 298 344 670 763 852 992 
+992 852 763 670 344 298 268 67 
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeSet;
+
+public class Draft {
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        ArrayList<Integer> arr = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            arr.add(sc.nextInt());
+        }
+        
+        Collections.sort(arr);
+        for(int i = 0; i < arr.size(); i++){
+            System.out.print(arr.get(i) + " ");
+        }
+        System.out.println("");
+        Collections.sort(arr, Collections.reverseOrder());
+        for(int i = 0; i < arr.size(); i++){
+            System.out.print(arr.get(i) + " ");
+        }
+    }
+}
