@@ -1,0 +1,49 @@
+Cho số p và x, nhiệm vụ của bạn làm tìm chữ số cuối cùng của p^x
+
+Input Format
+
+1 dòng duy nhất chứa 2 số p và x
+
+Constraints
+
+1<=p<=1000; 0<=x<=100000;
+
+Output Format
+
+In ra chữ số cuối cùng của p^x
+
+Sample Input 0
+
+8 7
+Sample Output 0
+
+2
+Sample Input 1
+
+893 99679
+Sample Output 1
+
+7
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static int last(int p, int x){
+        if(x == 0) return 1;
+        int result = 1;
+        for(int i = 0; i < x; i++){
+            result = (result * p) % 10;
+        }
+        return result % 10;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int p = sc.nextInt();
+        int x = sc.nextInt();
+        
+        System.out.println(last(p, x));
+    }
+}

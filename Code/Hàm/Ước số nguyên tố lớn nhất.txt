@@ -1,0 +1,50 @@
+Tìm ước số nguyên tố lớn nhất của một số nguyên dương.
+
+Input Format
+
+Dòng đầu tiên là số lượng test case T; T dòng tiếp theo mỗi dòng là một số nguyên dương N
+
+Constraints
+
+1≤T≤500; 2≤N≤10000000
+
+Output Format
+
+Ước số nguyên tố lớn nhất của n in ra mỗi test case trên 1 dòng
+
+Sample Input 0
+
+2
+10
+17
+Sample Output 0
+
+5
+17
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static int uocNtLonNhat(int n){
+        int ans = 0;
+        for(int i = 2; i <= Math.sqrt(n); i++){
+            if(n % i == 0){
+                ans = i;
+                while(n % i == 0) n /= i;
+            }
+        }
+        if(n > 1) ans = n;
+        return ans;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int t = sc.nextInt();
+        while(t-- > 0){
+            int n = sc.nextInt();
+            System.out.println(uocNtLonNhat(n));
+        }
+    }
+}

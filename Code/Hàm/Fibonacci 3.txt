@@ -1,0 +1,45 @@
+Nhiệm vụ của bạn là hãy tìm số thuộc dãy số Fibonacci nhỏ nhất lớn hơn hoặc bằng số N đã cho. Biết một số đầu tiên trong dãy Fibonacci là : 1, 1, 2, 3, 5, 8, 13....
+
+Input Format
+
+Dòng duy nhất chứa số nguyên dương N
+
+Constraints
+
+1<=N<=10^18
+
+Output Format
+
+In ra số Fibonacci nhỏ nhất lớn hơn hoặc bằng N
+
+Sample Input 0
+
+12
+Sample Output 0
+
+13
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static long fibo(long n){
+        if(n == 1) return 1;
+        long f1 = 1, f2 = 1, fn = 0;
+        for(int i = 2; i <= 93; i++){
+            fn = f1 + f2;
+            f1 = f2;
+            f2 = fn;
+            if(fn >= n) break;
+        }
+        return fn;
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long n = sc.nextLong();
+        System.out.println(fibo(n));
+                
+    }
+}

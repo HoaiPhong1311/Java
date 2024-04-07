@@ -1,0 +1,41 @@
+Đếm số lượng các số chính phương trong đoạn từ a tới b
+
+Input Format
+
+2 số nguyên dương a, b
+
+Constraints
+
+1≤a≤b≤10^18
+
+Output Format
+
+Số lượng số chính phương trong đoạn [a, b]
+
+Sample Input 0
+
+1 1000000000
+Sample Output 0
+
+31622
+
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static void chinhPhuongDoan(long a, long b){
+        long cnt = 0;
+        for(long i = (long)Math.ceil(Math.sqrt(a)); i <= (long)Math.sqrt(b); i++)
+            cnt++;
+        System.out.println(cnt);
+    }
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        
+        chinhPhuongDoan(a, b);
+    }
+}
