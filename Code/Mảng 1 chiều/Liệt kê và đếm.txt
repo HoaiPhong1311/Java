@@ -1,0 +1,78 @@
+Cho một dãy các số nguyên dương không quá 9 chữ số, mỗi số cách nhau vài khoảng trống, có thể xuống dòng. Hãy tìm các số không giảm (các chữ số theo thứ tự từ trái qua phải tạo thành dãy không giảm) và đếm số lần xuất hiện của các số đó.
+
+Input Format
+
+Gồm 1 dãy các số nguyên dương không quá 9 chữ số
+
+Constraints
+
+Dãy không quá 100000 số. Các số đều nguyên dương và không quá 9 chữ số.
+
+Output Format
+
+Ghi ra các số không giảm kèm theo số lần xuất hiện. Các số được liệt kê theo thứ tự sắp xếp số lần xuất hiện giảm dần. Trong trường hợp có nhiều số có cùng số lần xuất hiện thì thì số nhỏ hơn sẽ xếp trước.
+
+Sample Input 0
+
+888 289 123
+321 54 888
+Sample Output 0
+
+888 2
+123 1
+289 1
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
+public class Draft {
+    
+    public static boolean check(int n){
+        while(n >= 10){
+            int r1 = n % 10;
+            int r2 = n / 10 % 10;
+            if(r1 < r2) return false;
+            n /= 10;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        while(sc.hasNext()){
+            int n = sc.nextInt();
+            if(check(n)){
+                if(map.containsKey(n)) map.put(n, map.get(n) + 1);
+                else map.put(n, 1);
+            }
+        }
+        ArrayList<Integer> arr = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            Integer key = entry.getKey();
+            arr.add(key);
+        }
+        Collections.sort(arr, new Comparator<Integer>(){
+            @Override
+            public int compare(Integer t, Integer t1) {
+                int fre1 = map.get(t);
+                int fre2 = map.get(t1);
+                if(fre1 != fre2) return fre2 - fre1;
+                return t - t1;
+            }
+        });
+        for(int key : arr)
+            System.out.println(key + " " + map.get(key));
+    }
+}

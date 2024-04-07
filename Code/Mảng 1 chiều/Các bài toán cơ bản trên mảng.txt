@@ -1,0 +1,85 @@
+Cho mảng số nguyên gồm N phần tử. Thực hiện in ra các yêu cầu sau đây. (Bài này đúng là được nhé mọi người, TLE không sao cả vì test to quá)
+
+Input Format
+
+Dòng đầu tiên là số lượng phần tử trong mảng. Dòng thứ 2 là N phần tử trong mảng.
+
+Constraints
+
+2≤n≤10^6; -10^9≤ai≤10^9
+
+Output Format
+
+Dòng đầu tiên ghi số lớn nhất trong mảng kèm theo vị trí của nó (bắt đầu từ 0), nếu có nhiều số cùng có giá trị lớn nhất thì lấy vị trí xuất hiện đầu tiên. Dòng thứ 2 ghi số nhỏ nhất trong mảng kèm theo vị trí của nó (bắt đầu từ 0), nếu có nhiều số cùng có giá trị nhỏ nhất thì lấy vị trí xuất hiện cuối cùng. Dòng thứ 3 ghi ra số lượng số nguyên tố xuất hiện trong dãy. Dòng thứ 4 ghi ra tích lớn nhất của 2 số trong mảng (2 số khi nhân với nhau tạo ra tích lớn nhất). Dòng thứ 5 in ra YES nếu mảng đối xứng, ngược lại in ra NO. Dòng thứ 6 tính tích các số trong mảng, kết quả lấy dư với (10^9+7)
+
+Sample Input 0
+
+6
+-10 -10 2 3 4 5
+Sample Output 0
+
+5 5
+-10 1
+3
+100
+NO
+12000
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Draft {
+    
+    public static boolean NT(int n){
+        for(int i = 2; i <= Math.sqrt(n); i++){
+            if(n % i == 0) return false;
+        }
+        return n > 1;
+    }
+    
+    public static boolean dx(int a[], int n){
+        int l = 0, r = n - 1;
+        while(l < r){
+            if(a[l] != a[r]) return false;
+            l++; r--;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        int[] a = new int[n];
+        for(int i = 0; i < n; i++){
+            a[i] = sc.nextInt();
+        }
+        int maxP = 0, minP = 0, cntNT = 0;
+        for(int i = 0; i < n; i++){
+            if(a[i] > a[maxP]){
+                maxP = i;
+            }
+            if(a[i] <= a[minP]){
+                minP = i;
+            }
+            if(NT(a[i])) cntNT++;
+        }
+        boolean check = dx(a, n);
+        System.out.println(a[maxP] + " " + maxP);
+        System.out.println(a[minP] + " " + minP);
+        System.out.println(cntNT);
+        Arrays.sort(a);
+        System.out.println(Math.max(1l * a[0] * a[1], 1l * a[n - 1] * a[n - 2]));
+        if(check) System.out.println("YES");
+        else System.out.println("NO");
+        
+        long res = 1;
+        long mod = 1000000007;
+        for(int x : a){
+            res *= x;
+            res %= mod;
+        }
+        System.out.println(res % mod);
+    }
+}
