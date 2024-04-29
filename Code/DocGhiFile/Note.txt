@@ -1,0 +1,14 @@
+Đọc ghi file
+	- Đọc file
+		File file = new File("input.txt");
+       try{
+           Scanner sc = new Scanner(file);
+           String s = sc.nextLine();
+           System.out.println(s);
+       } catch(Exception ex){
+           ex.printStackTrace();
+       }
+	- Ghi file
+		PrintWriter out = new PrintWriter("output.txt");
+		out.write("");
+		out.close();

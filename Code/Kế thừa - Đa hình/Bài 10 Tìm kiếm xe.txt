@@ -1,0 +1,139 @@
+//      Bài 10. Tìm kiếm xe
+
+/*
+Một cửa hàng bán oto, xe máy cần quản lý các loại xe máy và xe ô tô. Trong đó xe máy có những thông tin : mã xe, tên xe, hãng, màu sắc, tốc độ tối đa, giá bán. Xe ô tô có những thông tin : mã xe, tên xe, hãng, màu sắc, mã lực, giá bán. Nhập danh sách các phương tiện và tiến hành liệt kê các xe có tên tìm kiếm theo thứ tự xuất hiện trong danh sách. Biết rằng xe máy có mã bắt đầu bằng XM (ví dụ XM001), và ô tô có mã bắt đầu bằng OTO (ví dụ OTO521)
+
+Input Format
+
+Dòng đầu tiên chứa N : số lượng phương tiện. Các dòng tiếp theo mô tả phương tiện, nếu là xe máy thì gồm 6 dòng : mã xe, tên xe, hãng, màu sắc, tốc độ tối đa, giá bán, nếu là ô tô thì gồm 6 dòng : mã xe, tên xe, hãng, màu sắc, mã lực, giá bán. Dòng cuối cùng là tên xe cần tìm kiếm.
+
+Constraints
+
+1<=N<=1000;
+
+Output Format
+
+In ra các phương tiện có tên tìm kiếm. Đầu tiên liệt kê các xe oto sau đó liệt kê các xe máy. Các thông tin của phương tiện được in cách nhau một dấu cách
+
+Sample Input 0
+
+5
+OTO1
+HONDAT5
+HONDA
+Vang
+186
+850
+XM2
+HON112
+HONDA
+Xanh
+200
+40
+XM3
+HON112
+HONDA
+Vang
+180
+100
+OTO4
+TOY555
+TOYOTA
+Vang
+150
+2400
+XM5
+Ex
+YAMAHA
+Trang
+220
+28
+TOY555
+Sample Output 0
+
+DANH SACH OTO :
+OTO4 TOY555 TOYOTA Vang 150 2400
+DANH SACH XE MAY :
+ */
+
+ import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class Vehicle {
+    protected String ma, ten, hang, mau;
+    protected int gia;
+
+    public Vehicle(String ma, String ten, String hang, String mau, int gia) {
+        this.ma = ma;
+        this.ten = ten;
+        this.hang = hang;
+        this.mau = mau;
+        this.gia = gia;
+    }
+
+    public String getTen() {
+        return ten;
+    }
+}
+
+class XeMay extends Vehicle {
+    private int tocDo;    
+
+    public XeMay(String ma, String ten, String hang, String mau, int tocDo, int gia) {
+        super(ma, ten, hang, mau, gia);
+        this.tocDo = tocDo;
+    }
+
+    @Override
+    public String toString() {
+        return this.ma + " " + this.ten + " " + this.hang + " " + this.mau + " " + this.tocDo + " " + this.gia;
+    }
+    
+}
+
+class OTo extends Vehicle{
+    private int maLuc;
+
+    public OTo(String ma, String ten, String hang, String mau, int maLuc, int gia) {
+        super(ma, ten, hang, mau, gia);
+        this.maLuc = maLuc;
+    }
+    
+    @Override
+    public String toString() {
+        return this.ma + " " + this.ten + " " + this.hang + " " + this.mau + " " + this.maLuc + " " + this.gia;
+    }
+}
+
+public class Bai_10 {
+
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        ArrayList<XeMay> xm = new ArrayList<>();
+        ArrayList<OTo> ot = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            String ma = sc.next();
+            if(ma.startsWith("OTO")){
+                OTo a = new OTo(ma, sc.next(), sc.next(), sc.next(), sc.nextInt(), sc.nextInt());
+                ot.add(a);
+            } else{
+                XeMay a = new XeMay(ma, sc.next(), sc.next(), sc.next(), sc.nextInt(), sc.nextInt());
+                xm.add(a);
+            }
+        }
+        String ten = sc.next();
+        System.out.println("DANH SACH OTO :");
+        for(OTo x : ot){
+            if(x.getTen().equals(ten)) System.out.println(x);
+        }
+        System.out.println("DANH SACH XE MAY :");
+        for(XeMay x : xm){
+            if(x.getTen().equals(ten)) System.out.println(x);
+        }
+    }
+}

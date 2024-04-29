@@ -1,0 +1,204 @@
+//      Bài 4. Truy vấn sinh viên, giáo viên
+
+/*
+Trường đại học XYZ cần quản lý các đối tượng là sinh viên và giáo viên. Sinh viên gồm các thông tin : mã sinh viên, tên, ngày sinh, địa chỉ, lớp, điểm gpa. Giáo viên gồm các thông tin : mã giáo viên, tên, ngày sinh, địa chỉ, khoa, lương, lớp mà giáo viên này phụ trách chủ nhiệm. Thực hiện đọc các thông tin danh sách sinh viên và giáo viên từ bàn phím sau đó chuẩn hóa tên, ngày sinh và in ra danh sách sinh viên sau đó là danh sách giáo viên, biết rằng sinh viên sẽ có mã bắt đầu bằng SV (ví dụ SV112), giáo viên có mã bắt đầu bằng GV (ví dụ GV222) theo địa chỉ tìm kiếm.
+
+Input Format
+
+Dòng đầu tiên là N : số lượng giáo viên và sinh viên. Các dòng tiếp theo mô tả thông tin của giáo viên hoặc sinh viên, mỗi thông tin gồm 6 dòng, đối với sinh viên 6 dòng gồm : mã sinh viên, tên, ngày sinh, địa chỉ, lớp, điểm gpa, đối với giáo viên 6 dòng gồm : mã giáo viên, tên, ngày sinh, địa chỉ, khoa, lương, lớp mà giáo viên này phụ trách chủ nhiệm. Dòng cuối cùng của input là địa chỉ cần tìm kiếm.
+
+Constraints
+
+1<=N<=1000;
+
+Output Format
+
+Đầu tiên in ra danh sách giáo viên, mỗi giáo viên in ra thông tin trên 1 dòng, các thông tin cách nhau một dấu cách, không cần in thông tin về lớp mà giáo viên này quản lý. Những dòng tiếp theo in ra danh sách sinh viên, mỗi sinh viên in thông tin trên 1 dòng, các thông tin cách nhau một dấu cách, gpa in 2 số sau dấu phẩy.
+
+Sample Input 0
+
+7
+GV1
+trAN duC TuaN
+7/4/1974
+Thai Binh
+ATTT
+20000000
+CNTT1
+SV2
+trAN AnH MaNH
+27/10/2004
+Ha Nam
+DTVT1
+2.50
+SV3
+pham Phuong NAM
+8/8/2004
+Thai Binh
+DTVT2
+2.50
+GV4
+trAN AnH MaNH
+24/5/1972
+Ha Nam
+ATTT
+12000000
+DTVT2
+SV5
+trAN Phuong LoNG
+8/12/2004
+Ha Nam
+ATTT3
+2.50
+SV6
+Luong duC LoNG
+23/1/2004
+Ha Noi
+DTVT2
+3.20
+GV7
+Luong AnH TuaN
+18/10/1972
+Ha Nam
+Co khi
+25000000
+DTVT1
+Ha Noi
+Sample Output 0
+
+DANH SACH GIAO VIEN CO DIA CHI TAI Ha Noi :
+DANH SACH SINH VIEN CO DIA CHI TAI Ha Noi :
+SV6 Luong Duc Long 23/01/2004 Ha Noi DTVT2 3.20
+ */
+
+ 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+class Person {
+    private String ma, ten, ngaySinh, diaChi;
+
+    public Person(String ma, String ten, String ngaySinh, String diaChi) {
+        this.ma = ma;
+        this.ten = ten;
+        this.ngaySinh = ngaySinh;
+        this.diaChi = diaChi;
+    }
+
+    public Person() {
+        ten = "";
+        ngaySinh = "";
+        diaChi = "";
+    }
+    
+    public void chuanHoa(){
+        // chuanHoaTen
+        String[] a = ten.trim().split("\\s+");
+        String name = "";
+        for(String x : a){
+            name += Character.toUpperCase(x.charAt(0));
+            for(int i = 1; i < x.length(); i++)
+                name += Character.toLowerCase(x.charAt(i));
+            name += " ";
+        }
+        ten = name.trim();
+        
+        // chuanHoaNgaySinh
+        StringBuilder sb = new StringBuilder(ngaySinh);
+        if(sb.charAt(1) == '/') sb.insert(0, 0);
+        if(sb.charAt(4) == '/') sb.insert(3, 0);
+        ngaySinh = sb.toString();
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public String toString(){
+        return ma + " " + ten + " " + ngaySinh + " " + diaChi;
+    }
+}
+
+
+class Student extends Person {
+    private String lop;
+    private double gpa;
+
+    public Student(String lop, double gpa, String ma, String ten, String ngaySinh, String diaChi) {
+        super(ma, ten, ngaySinh, diaChi);
+        this.lop = lop;
+        this.gpa = gpa;
+    }
+    
+    public String toString(){
+        return super.toString() + " " + lop + " " + String.format("%.2f", gpa);
+    }
+}
+
+
+class Teacher extends Person {
+    private String khoa, lop;
+    private long luong;
+
+    public Teacher(String khoa, String lop, long luong, String ma, String ten, String ngaySinh, String diaChi) {
+        super(ma, ten, ngaySinh, diaChi);
+        this.khoa = khoa;
+        this.lop = lop;
+        this.luong = luong;
+    }
+
+    
+    
+    public String toString(){
+        return super.toString() + " " + khoa + " " + luong;
+    }
+}
+
+
+public class Bai_4 {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        int n = sc.nextInt();
+        ArrayList<Student> a1 = new ArrayList<>();
+        ArrayList<Teacher> a2 = new ArrayList<>();
+        for(int i = 0; i < n; i++){
+            String ma, ten, ngaySinh, diaChi, khoa, lop;
+            double gpa;
+            long luong;
+            sc.nextLine();
+            ma = sc.nextLine();
+            if(ma.charAt(0) == 'G'){
+                ten = sc.nextLine(); ngaySinh = sc.nextLine();
+                diaChi = sc.nextLine(); khoa = sc.nextLine();
+                luong = sc.nextLong();
+                lop = sc.nextLine();
+                Teacher t = new Teacher(khoa, lop, luong, ma, ten, ngaySinh, diaChi);
+                t.chuanHoa();
+                a2.add(t);
+            }
+            else{
+                ten = sc.nextLine(); ngaySinh = sc.nextLine();
+                diaChi = sc.nextLine(); lop = sc.nextLine();
+                gpa = sc.nextDouble();
+                Student s = new Student(lop, gpa, ma, ten, ngaySinh, diaChi);
+                s.chuanHoa();
+                a1.add(s);
+            }
+        }
+        sc.nextLine();
+        String diaChi = sc.nextLine();
+        System.out.println("DANH SACH GIAO VIEN CO DIA CHI TAI " + diaChi + " :");
+        for (Teacher x : a2) {
+            if(x.getDiaChi().equals(diaChi))
+                System.out.println(x);
+        }
+        System.out.println("DANH SACH SINH VIEN CO DIA CHI TAI " + diaChi + " :");
+        for (Student x : a1) {
+            if(x.getDiaChi().equals(diaChi))
+                System.out.println(x);
+        }
+    }
+}

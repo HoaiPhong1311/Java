@@ -1,0 +1,86 @@
+//      Bài 6. Tính lương nhân viên
+
+/*
+Thông tin về nhân viên bao gồm: Mã nhân viên (tự động tăng theo thứ tự nhập, tính từ NV01, nếu chỉ có 1 nhân viên thì mã là NV01) - Họ và tên - Lương cơ bản mỗi ngày công - Số ngày công - Chức vụ Tiền lương được tính bằng lương cơ bản nhân với số ngày công. Giả sử quy tắc tính tiền thưởng như sau:
+
+Số ngày công từ 25 trở lên thì thưởng 20% tiền lương
+Số ngày công từ 22 đến dưới 25 thì thưởng 10% tiền lương
+Dưới 22 ngày công thì không có thưởng. Mỗi nhân viên có thể có thêm phụ cấp chức vụ:
+GD: 250000
+PGD: 200000
+TP: 180000
+NV: 150000 Hãy nhập thông tin 1 nhân viên và tính toán thu nhập theo quy tắc trên.
+Input Format
+
+Gồm 4 dòng lần lượt ghi Họ tên, lương cơ bản, số ngày công và chức vụ; Số ngày công là số nguyên không âm không vượt quá 31;
+
+Constraints
+
+Lương cơ bản là số nguyên dương không quá 10^7;
+
+Output Format
+
+Ghi ra một dòng gồm: mã nhân viên, tên nhân viên, lương tháng, thưởng, phụ cấp và thu nhập. Mỗi thông tin cách nhau một khoảng trống.
+
+Sample Input 0
+
+Nguyen Van Teo
+26000
+21
+PGD
+Sample Output 0
+
+NV01 Nguyen Van Teo 546000 0 200000 746000
+ */
+
+ 
+import java.util.Scanner;
+
+class NhanVien {
+    private String ten, chucVu;
+    private long luongCB, ngayCong;
+    long luong, thuong = 0, phuCap, thuNhap;
+
+    public NhanVien(String ten, String chucVu, long luongCB, long ngayCong) {
+        this.ten = ten;
+        this.chucVu = chucVu;
+        this.luongCB = luongCB;
+        this.ngayCong = ngayCong;
+    }
+
+
+    
+    public void tinh(){
+        luong = luongCB * ngayCong;
+        
+        if(ngayCong >= 25) thuong = (long)(0.2 * luong);
+        else if(ngayCong >= 22) thuong = (long)(0.1 * luong);
+        
+        if(chucVu.compareTo("GD") == 0) phuCap = 250000;
+        else if(chucVu.compareTo("PGD") == 0) phuCap = 200000;
+        else if(chucVu.compareTo("TP") == 0) phuCap = 180000;
+        else phuCap = 150000;
+        
+        thuNhap = luong + thuong + phuCap;
+    }
+    
+    public String toString(){
+        return "NV01" + " " + ten + " " + luong + " " + thuong + " " + phuCap + " " + thuNhap;
+    }
+}
+
+public class Bai_6 {
+    
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        String name = sc.nextLine();
+        long luong = sc.nextLong(), ngay = sc.nextLong();
+        sc.nextLine();
+        String cv = sc.nextLine();
+        NhanVien nv = new NhanVien( name, cv, luong, ngay);
+        
+        nv.tinh();
+        System.out.println(nv);
+    }
+}
